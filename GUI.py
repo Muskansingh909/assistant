@@ -1,5 +1,7 @@
 from tkinter import*
 from PIL import Image,ImageTk
+import speech_text
+import action
 root=Tk()
 root.title("AI Assistant")
 root.geometry("550x675")
@@ -8,13 +10,28 @@ root.config(bg="#6F8FAF")
 
 #ask fun
 def ask():
-    print("ask")
+    user_val=speech_text.speech_to_text()
+    bot_val=action.action(user_val)
+    text.insert(END,'User--->'+user_val+"\n")
+    if bot_val !=None:
+        text.insert(END,"BOT<---"+str(bot_val)+"\n")
+    if bot_val== "ohk mam":
+        root.destroy()   
+    
 
 def send():
-    print("send")    
+    send=entry.get()  
+    bot=action.action(send)
+    text.insert(END,'User--->'+send+"\n")
+    if bot!=None:
+        text.insert(END,"BOT<---"+str(bot)+"\n")
+    if bot== "ohk mam":
+        root.destroy()   
+    
+
 
 def del_text():
-    print("Text del")
+    text.delete('1.0',"end")
 
 
 #frame
